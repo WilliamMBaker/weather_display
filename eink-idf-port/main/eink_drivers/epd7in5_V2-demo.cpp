@@ -60,8 +60,8 @@ void setup()
   Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
   Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
   Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
-  Paint_DrawString_CN(130, 0, " 你好abc", &Font12CN, BLACK, WHITE);
-  Paint_DrawString_CN(130, 20, "微雪电子", &Font24CN, WHITE, BLACK);
+//   Paint_DrawString_CN(130, 0, " 你好abc", &Font12CN, BLACK, WHITE);
+//   Paint_DrawString_CN(130, 20, "微雪电子", &Font24CN, WHITE, BLACK);
 
   printf("EPD_Display\r\n");
   EPD_7IN5_V2_Display(BlackImage);
@@ -137,11 +137,11 @@ void setup()
     Paint_DrawString_EN(10, 20, "hello world", &Font12, GRAY3, GRAY1);
     Paint_DrawNum(10, 33, 123456789, &Font12, GRAY4, GRAY2);
     Paint_DrawNum(10, 50, 987654321, &Font16, GRAY1, GRAY4);
-    Paint_DrawString_CN(130, 0,"你好abc", &Font12CN, GRAY4, GRAY1);
-    Paint_DrawString_CN(130, 20,"你好abc", &Font12CN, GRAY3, GRAY2);
-    Paint_DrawString_CN(130, 40,"你好abc", &Font12CN, GRAY2, GRAY3);
-    Paint_DrawString_CN(130, 60,"你好abc", &Font12CN, GRAY1, GRAY4);
-    Paint_DrawString_CN(10, 130, "微雪电子", &Font24CN, GRAY1, GRAY4);
+    // Paint_DrawString_CN(130, 0,"你好abc", &Font12CN, GRAY4, GRAY1);
+    // Paint_DrawString_CN(130, 20,"你好abc", &Font12CN, GRAY3, GRAY2);
+    // Paint_DrawString_CN(130, 40,"你好abc", &Font12CN, GRAY2, GRAY3);
+    // Paint_DrawString_CN(130, 60,"你好abc", &Font12CN, GRAY1, GRAY4);
+    // Paint_DrawString_CN(10, 130, "微雪电子", &Font24CN, GRAY1, GRAY4);
     EPD_7IN5_V2_WritePicture_4Gray(BlackImage);
     DEV_Delay_ms(3000);
 #endif
