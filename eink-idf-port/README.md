@@ -5,8 +5,9 @@ This project plans to create a long lasting, battery powered weather display, wi
 - [ESP32 E-Ink Weather Display](#esp32-e-ink-weather-display)
 - [Table of Contents](#table-of-contents)
   - [Project Aims](#project-aims)
-  - [Components Used (so far)](#components-used-so-far)
+  - [Components Used](#components-used)
   - [Testing Arduino Display Code](#testing-arduino-display-code)
+    - [Wiring Diagram](#wiring-diagram)
   - [Porting Arduino Code to ESP-IDF](#porting-arduino-code-to-esp-idf)
 
 ## Project Aims
@@ -23,7 +24,7 @@ This project plans to create a long lasting, battery powered weather display, wi
 * [ ] Custom PCB bringing all this together.
 * [ ] Make app that can connect to ESP (WiFi or BLE?).
 
-## Components Used (so far)
+## Components Used
 - ESP32-S3 Dev Kit.
 - Waveshare E-Paper Driver HAT Rev2.3.
 - 7.5inch e-Paper display.
@@ -46,6 +47,10 @@ I also changed the pin defines in the `DEV_Config.h` file to these as they are b
 #define EPD_SCK_PIN  39
 #define EPD_MOSI_PIN 40
 ```
+
+### Wiring Diagram
+
+![alt text](images/eink_HAT_wiring.png "Title")
 
 ## Porting Arduino Code to ESP-IDF
 
