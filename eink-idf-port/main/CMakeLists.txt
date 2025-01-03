@@ -1,2 +1,11 @@
 idf_component_register(SRCS "main.c"
+                            "eink_drivers/DEV_Config.cpp"
+                            "eink_drivers/EPD_7in5_V2.cpp"
+                            "eink_drivers/font8.cpp"
+                            "eink_drivers/font12.cpp"
+                            "eink_drivers/font16.cpp"
+                            "eink_drivers/font20.cpp"
+                            "eink_drivers/font24.cpp"
+                            "eink_drivers/GUI_Paint.cpp"
+                            "eink_drivers/ImageData.c"
                     INCLUDE_DIRS ".")
