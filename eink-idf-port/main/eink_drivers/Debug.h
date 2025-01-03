@@ -14,11 +14,11 @@
 #ifndef __DEBUG_H
 #define __DEBUG_H
 
-#include <Wire.h>
+#include "esp_log.h"
 
 #define USE_DEBUG 1
 #if USE_DEBUG
-	#define Debug(__info) Serial.print(__info)
+	#define Debug(__info) ESP_LOG_INFO("esp" ,__info)
 #else
 	#define Debug(__info)  
 #endif
