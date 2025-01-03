@@ -16,9 +16,9 @@
 
 #include "esp_log.h"
 
-#define USE_DEBUG 1
+#define USE_DEBUG 0
 #if USE_DEBUG
-	#define Debug(__info) ESP_LOG_INFO("esp" ,__info)
+	#define Debug(__info) (ESP_LOGI("esp", __info))
 #else
 	#define Debug(__info)  
 #endif

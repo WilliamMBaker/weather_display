@@ -30,9 +30,12 @@
 #ifndef _DEV_CONFIG_H_
 #define _DEV_CONFIG_H_
 
-#include <Arduino.h>
+// #include <Arduino.h>
 #include <stdint.h>
 #include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
 
 /**
  * data
@@ -54,16 +57,22 @@
 #define GPIO_PIN_SET   1
 #define GPIO_PIN_RESET 0
 
+// /**
+//  * GPIO read and write
+// **/
+// #define DEV_Digital_Write(_pin, _value) digitalWrite(_pin, _value == 0? LOW:HIGH)
+// #define DEV_Digital_Read(_pin) digitalRead(_pin)
+
 /**
  * GPIO read and write
 **/
-#define DEV_Digital_Write(_pin, _value) digitalWrite(_pin, _value == 0? LOW:HIGH)
-#define DEV_Digital_Read(_pin) digitalRead(_pin)
+#define DEV_Digital_Write(_pin, _value) gpio_set_level((gpio_num_t)_pin, _value)
+#define DEV_Digital_Read(_pin) gpio_get_level((gpio_num_t)_pin)
 
 /**
  * delay x ms
 **/
-#define DEV_Delay_ms(__xms) delay(__xms)
+#define DEV_Delay_ms(__xms) vTaskDelay( pdMS_TO_TICKS(__xms))
 
 /*------------------------------------------------------------------------------------------------------*/
 UBYTE DEV_Module_Init(void);
