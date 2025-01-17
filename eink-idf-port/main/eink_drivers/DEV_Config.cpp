@@ -59,7 +59,7 @@ Info:
 UBYTE DEV_Module_Init(void)
 {
 	//gpio
-	// GPIO_Config();
+	GPIO_Config();
 
 	//serial printf
 	// Serial.begin(115200);
