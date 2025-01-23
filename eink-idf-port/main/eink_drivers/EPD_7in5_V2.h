@@ -33,6 +33,10 @@
 #ifndef _EPD_7IN5_V2_H_
 #define _EPD_7IN5_V2_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "DEV_Config.h"
 
 
@@ -52,4 +56,8 @@ void EPD_7IN5_V2_Display_4Gray(const UBYTE *Image);
 void EPD_7IN5_V2_WritePicture_4Gray(const UBYTE *Image);
 void EPD_7IN5_V2_Sleep(void);
 
+#ifdef __cplusplus
+}
 #endif
+
+#endif // EPD_7IN5_V2_H
