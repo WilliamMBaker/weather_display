@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_log.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
+
+#include "eink_drivers/EPD_7in5_V2.h"
 #include "eink_drivers/DEV_Config.h"
 #include "eink_drivers/EPD.h"
 #include "eink_drivers/GUI_Paint.h"
@@ -20,12 +23,14 @@
 #define EPD_SCK_PIN  39
 #define EPD_MOSI_PIN 40
 
+#define TAG "ESP"
+
 void epd_task(void *pvParameters)
 {
-    printf("EPD_7IN5_V2_test Demo\r\n");
+    ESP_LOGI(TAG, "EPD_7IN5_V2_test Demo\r\n");
     DEV_Module_Init();
 
-    printf("e-Paper Init and Clear...\r\n");
+    ESP_LOGI(TAG, "e-Paper Init and Clear...\r\n");
     EPD_7IN5_V2_Init();
     EPD_7IN5_V2_Clear();
     DEV_Delay_ms(500);
@@ -33,13 +38,13 @@ void epd_task(void *pvParameters)
     UBYTE *BlackImage;
     UWORD Imagesize = ((EPD_7IN5_V2_WIDTH % 8 == 0) ? (EPD_7IN5_V2_WIDTH / 8 ) : (EPD_7IN5_V2_WIDTH / 8 + 1)) * EPD_7IN5_V2_HEIGHT;
     if ((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
-        printf("Failed to apply for black memory...\r\n");
+        ESP_LOGI(TAG, "Failed to apply for black memory...\r\n");
         while (1);
     }
-    printf("Paint_NewImage\r\n");
+    ESP_LOGI(TAG, "Paint_NewImage\r\n");
     Paint_NewImage(BlackImage, EPD_7IN5_V2_WIDTH, EPD_7IN5_V2_HEIGHT, 0, WHITE);
 
-    printf("show image for array\r\n");
+    ESP_LOGI(TAG, "show image for array\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_DrawBitMap(gImage_7in5_V2);
@@ -47,11 +52,11 @@ void epd_task(void *pvParameters)
     DEV_Delay_ms(2000);
 
     EPD_7IN5_V2_Init_Fast();  
-    printf("SelectImage:BlackImage\r\n");
+    ESP_LOGI(TAG, "SelectImage:BlackImage\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
 
-    printf("Drawing:BlackImage\r\n");
+    ESP_LOGI(TAG, "Drawing:BlackImage\r\n");
     Paint_DrawPoint(10, 80, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
     Paint_DrawPoint(10, 90, BLACK, DOT_PIXEL_2X2, DOT_STYLE_DFT);
     Paint_DrawPoint(10, 100, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
@@ -68,13 +73,13 @@ void epd_task(void *pvParameters)
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
 
-    printf("EPD_Display\r\n");
+    ESP_LOGI(TAG, "EPD_Display\r\n");
     EPD_7IN5_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 
     EPD_7IN5_V2_Init_Part();
     Paint_NewImage(BlackImage, Font20.Width * 7, Font20.Height, 0, WHITE);
-    printf("Partial refresh\r\n");
+    ESP_LOGI(TAG, "Partial refresh\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     
@@ -109,11 +114,11 @@ void epd_task(void *pvParameters)
         DEV_Delay_ms(500);
     }
 
-    printf("Clear...\r\n");
+    ESP_LOGI(TAG, "Clear...\r\n");
     EPD_7IN5_V2_Init();
     EPD_7IN5_V2_Clear();
 
-    printf("Goto Sleep...\r\n");
+    ESP_LOGI(TAG, "Goto Sleep...\r\n");
     EPD_7IN5_V2_Sleep();
     free(BlackImage);
     BlackImage = NULL;
