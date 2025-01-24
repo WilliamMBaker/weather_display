@@ -28,6 +28,7 @@
 #
 ******************************************************************************/
 #include "DEV_Config.h"
+#include "driver/gpio.h"
 
 void GPIO_Config(void)
 {
@@ -41,6 +42,28 @@ void GPIO_Config(void)
 
     // digitalWrite(EPD_CS_PIN , HIGH);
     // digitalWrite(EPD_SCK_PIN, LOW);
+
+    gpio_config_t io_conf;
+
+    // Configure EPD_BUSY_PIN as input
+    io_conf.intr_type = GPIO_INTR_DISABLE;
+    io_conf.mode = GPIO_MODE_INPUT;
+    io_conf.pin_bit_mask = (1ULL << EPD_BUSY_PIN);
+    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
+    io_conf.pull_up_en = GPIO_PULLUP_ENABLE;
+    gpio_config(&io_conf);
+
+    // Configure EPD_RST_PIN, EPD_DC_PIN, EPD_SCK_PIN, EPD_MOSI_PIN, EPD_CS_PIN as output
+    io_conf.intr_type = GPIO_INTR_DISABLE;
+    io_conf.mode = GPIO_MODE_OUTPUT;
+    io_conf.pin_bit_mask = (1ULL << EPD_RST_PIN) | (1ULL << EPD_DC_PIN) | (1ULL << EPD_SCK_PIN) | (1ULL << EPD_MOSI_PIN) | (1ULL << EPD_CS_PIN);
+    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
+    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
+    gpio_config(&io_conf);
+
+    // Set initial levels
+    gpio_set_level((gpio_num_t)EPD_CS_PIN, 1);
+    gpio_set_level((gpio_num_t)EPD_SCK_PIN, 0);
 }
 
 void GPIO_Mode(UWORD GPIO_Pin, UWORD Mode)

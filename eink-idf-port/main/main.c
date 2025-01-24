@@ -11,10 +11,6 @@
 #include "eink_drivers/GUI_Paint.h"
 #include "eink_drivers/imagedata.h"
 
-#define PIN_NUM_MISO 19
-#define PIN_NUM_MOSI 23
-#define PIN_NUM_CLK  18
-#define PIN_NUM_CS   5
 
 #define EPD_BUSY_PIN 35
 #define EPD_RST_PIN  36
