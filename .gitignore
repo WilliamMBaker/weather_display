@@ -3,3 +3,6 @@
 /downloaded_samples/E-Paper_ESP32_Driver_Board_Code
 /eink-idf-port/build
 /eink-idf-port/sdkconfig.old
+/eink-idf-port/.vscode/c_cpp_properties.json
+/eink-idf-port/.vscode/launch.json
+/eink-idf-port/.vscode/settings.json
