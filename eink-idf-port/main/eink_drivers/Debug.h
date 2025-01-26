@@ -20,7 +20,7 @@
 #if USE_DEBUG
 	#define Debug(__info) (ESP_LOGI("esp", __info))
 #else
-	#define Debug(__info)  
+	#define Debug(__info) ESP_LOGD("debug", __info)
 #endif
 
 #endif

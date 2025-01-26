@@ -20,6 +20,7 @@
 #define EPD_MOSI_PIN 40
 
 #define TAG "ESP"
+#define INCLUDE_vTaskDelay 1
 
 void epd_task(void *pvParameters)
 {
