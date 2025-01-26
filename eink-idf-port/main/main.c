@@ -121,9 +121,17 @@ void epd_task(void *pvParameters)
     BlackImage = NULL;
 
     vTaskDelete(NULL);
+
+    while(1) {
+        DEV_Delay_ms(100);
+    }
 }
 
 void app_main(void)
 {
     xTaskCreate(epd_task, "epd_task", 8192, NULL, 5, NULL);
+
+    while(1) {
+        DEV_Delay_ms(100);
+    }
 }
