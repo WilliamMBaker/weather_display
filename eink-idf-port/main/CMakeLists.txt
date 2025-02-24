@@ -8,4 +8,5 @@ idf_component_register(SRCS "main.c"
                             "eink_drivers/font24.cpp"
                             "eink_drivers/GUI_Paint.cpp"
                             "eink_drivers/ImageData.c"
+                            "WMOWeatherCodes.c"
                     INCLUDE_DIRS ".")

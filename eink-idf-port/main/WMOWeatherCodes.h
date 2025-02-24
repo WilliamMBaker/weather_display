@@ -8,8 +8,8 @@
 #define WMO_NO_PERCIP_CODE_05	05 // Haze
 #define WMO_NO_PERCIP_CODE_06	06 // Widespread dust in suspension in the air, not raised by wind at or near the station at the time of observation
 #define WMO_NO_PERCIP_CODE_07	07 // Dust or sand raised by wind at or near the station at the time of observation, but no well developed dust whirl(s) or sand whirl(s), and no duststorm or sandstorm seen
-#define WMO_NO_PERCIP_CODE_08	08 // Well developed dust whirl(s) or sand whirl(s) seen at or near the station during the preceding hour or at the time ot observation, but no duststorm or sandstorm
-#define WMO_NO_PERCIP_CODE_09	09 // Duststorm or sandstorm within sight at the time of observation, or at the station during the preceding hour
+#define WMO_NO_PERCIP_CODE_08	8 // Well developed dust whirl(s) or sand whirl(s) seen at or near the station during the preceding hour or at the time ot observation, but no duststorm or sandstorm
+#define WMO_NO_PERCIP_CODE_09	9 // Duststorm or sandstorm within sight at the time of observation, or at the station during the preceding hour
 #define WMO_NO_PERCIP_CODE_10	10 // Mist
 #define WMO_NO_PERCIP_CODE_11	11 // Patches, shallow fog or ice fog at the station, whether on land or sea, not deeper than about 2 metres on land or 10 metres at sea
 #define WMO_NO_PERCIP_CODE_12	12 // More or less continuous, shallow fog or ice fog at the station, whether on land or sea, not deeper than about 2 metres on land or 10 metres at sea
