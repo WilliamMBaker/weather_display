@@ -9,4 +9,5 @@ idf_component_register(SRCS "main.c"
                             "eink_drivers/GUI_Paint.cpp"
                             "eink_drivers/ImageData.c"
                             "WMOWeatherCodes.c"
+                            "wifiSta.c"
                     INCLUDE_DIRS ".")

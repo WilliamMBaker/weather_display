@@ -4,12 +4,15 @@
 #include "esp_log.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
+#include "nvs_flash.h"
 
 #include "eink_drivers/EPD_7in5_V2.h"
 #include "eink_drivers/DEV_Config.h"
 #include "eink_drivers/EPD.h"
 #include "eink_drivers/GUI_Paint.h"
 #include "eink_drivers/imagedata.h"
+
+#include "wifiSta.h"
 
 
 #define EPD_BUSY_PIN 35
@@ -127,9 +130,29 @@ void epd_task(void *pvParameters)
     }
 }
 
+void wifi_task(void *pvParameters)
+{
+    //Initialize NVS
+	esp_err_t ret = nvs_flash_init();
+	if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+	  ESP_ERROR_CHECK(nvs_flash_erase());
+	  ret = nvs_flash_init();
+	}
+	ESP_ERROR_CHECK(ret);
+
+	ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
+	wifi_init_sta();
+
+	while(1)
+    {
+		DEV_Delay_ms(100);
+	}
+}
+
 void app_main(void)
 {
     xTaskCreate(epd_task, "epd_task", 8192, NULL, 5, NULL);
+    xTaskCreate(wifi_task, "wifi_task", 8192, NULL, 5, NULL);
 
     while(1) {
         DEV_Delay_ms(100);
