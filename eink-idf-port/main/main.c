@@ -143,6 +143,8 @@ void wifi_task(void *pvParameters)
 	ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
 	wifi_init_sta();
 
+	wifi_test_get();
+
 	while(1)
     {
 		DEV_Delay_ms(100);
