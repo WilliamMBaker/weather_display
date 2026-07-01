@@ -153,8 +153,8 @@ void wifi_task(void *pvParameters)
 
 void app_main(void)
 {
-    xTaskCreate(epd_task, "epd_task", 8192, NULL, 5, NULL);
-    xTaskCreate(wifi_task, "wifi_task", 8192, NULL, 5, NULL);
+    xTaskCreate(epd_task, "epd_task", 8192 * 2, NULL, 5, NULL);
+    xTaskCreate(wifi_task, "wifi_task", 8192 * 2, NULL, 5, NULL);
 
     while(1) {
         DEV_Delay_ms(100);

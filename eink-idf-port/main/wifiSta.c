@@ -136,6 +136,23 @@ void get_temp_pressure_humidity(const char *json_string)
     free(response_data);
 }
 
+void get_weather_description(const char *json_string)
+{
+    cJSON *json = cJSON_Parse(json_string);
+    char *string = cJSON_Print(json);
+    printf("JSON: %s\n", string);
+    cJSON_Delete(json);
+    // cJSON *root = cJSON_Parse(json_string);
+    // cJSON *obj = cJSON_GetObjectItemCaseSensitive(root, "weather");
+
+    // cJSON *weather = cJSON_GetArrayItem(obj, 0);
+    // char *description = cJSON_GetObjectItemCaseSensitive(weather, "description")->valuestring;
+    // printf("Weather: %s\n", description);
+
+    // cJSON_Delete(root);
+    // free(response_data);
+}
+
 esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 {
     switch (evt->event_id) {
@@ -146,8 +163,8 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
             break;
         case HTTP_EVENT_ON_FINISH:
             all_chunks_received = true;
-            ESP_LOGI("OpenWeatherAPI", "Received data: %s", response_data);
-            // get_temp_pressure_humidity(response_data);
+            // ESP_LOGI("OpenWeatherAPI", "Received data: %s", response_data); // Raw un-parsed json data
+            get_weather_description(response_data);
             break;
         default:
             break;
@@ -157,26 +174,7 @@ esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 
 void wifi_test_get(void)
 {
-// 52.39731507393248, -1.8167086257212137
-    // char open_weather_map_url[200];
-    // snprintf(open_weather_map_url,
-    //          sizeof(open_weather_map_url),
-    //          "%s%s%s%s%s%s",
-    //          "http://api.openweathermap.org/data/2.5/weather?q=",
-    //          city,
-    //          ",",
-    //          country_code,
-    //          "&APPID=",
-    //          open_weather_map_api_key);
-
-	// snprintf(open_weather_map_url,
-    //          sizeof(open_weather_map_url),
-    //          "%s%s%s%s%s%s",
-	// 		);
-
-    ESP_LOGI(TAG, "Starting test");
-
-    char open_weather_map_url[] = "https://api.open-meteo.com/v1/forecast?latitude=52.4814&longitude=-1.8998&hourly=temperature_2m,weather_code&timeformat=unixtime";
+    char open_weather_map_url[] = "https://api.open-meteo.com/v1/forecast?latitude=51.8706&longitude=0.1592&hourly=temperature_2m,weather_code&timeformat=unixtime";
 
     esp_http_client_config_t config = {
         .url = open_weather_map_url,
@@ -185,29 +183,8 @@ void wifi_test_get(void)
         .crt_bundle_attach = esp_crt_bundle_attach,  // Use the default certificate bundle
     };
 
-    ESP_LOGI(TAG, "Setup complete");
-
     esp_http_client_handle_t client = esp_http_client_init(&config);
     esp_http_client_set_header(client, "Content-Type", "application/x-www-form-urlencoded");
-
-    // 52.39731507393248, -1.8167086257212137
-    // char open_weather_map_url[200];
-    // snprintf(open_weather_map_url,
-    //          sizeof(open_weather_map_url),
-    //          "%s%s%s%s%s%s",
-    //          "http://api.openweathermap.org/data/2.5/weather?q=",
-    //          city,
-    //          ",",
-    //          country_code,
-    //          "&APPID=",
-    //          open_weather_map_api_key);
-
-	// snprintf(open_weather_map_url,
-    //          sizeof(open_weather_map_url),
-    //          "%s%s%s%s%s%s",
-	// 		);
-
-    ESP_LOGI(TAG, "Handler created");
 
     esp_err_t err = esp_http_client_perform(client);
 
