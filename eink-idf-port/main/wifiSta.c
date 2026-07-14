@@ -139,8 +139,34 @@ void get_temp_pressure_humidity(const char *json_string)
 void get_weather_description(const char *json_string)
 {
     cJSON *json = cJSON_Parse(json_string);
-    char *string = cJSON_Print(json);
-    printf("JSON: %s\n", string);
+    // char *string = cJSON_Print(json);
+    // printf("JSON: %s\n", string);
+
+    cJSON *latitude = cJSON_GetObjectItem(json, "latitude");
+    cJSON *longitude = cJSON_GetObjectItem(json, "longitude");
+    cJSON *timezone = cJSON_GetObjectItem(json, "timezone");
+    cJSON *timezone_abbreviation = cJSON_GetObjectItem(json, "timezone_abbreviation");
+    cJSON *hourly_units = cJSON_GetObjectItem(json, "hourly_units");
+    cJSON *hourly = cJSON_GetObjectItem(json, "hourly");
+    cJSON *time = cJSON_GetObjectItem(hourly, "time");
+    cJSON *temperature_2m = cJSON_GetObjectItem(hourly, "temperature_2m");
+    cJSON *weather_code = cJSON_GetObjectItem(hourly, "weather_code");
+
+    char *latitude_string = cJSON_Print(latitude);
+    char *longitude_string = cJSON_Print(longitude);
+    char *timezone_string = cJSON_Print(timezone);
+    char *timezone_abbreviation_string = cJSON_Print(timezone_abbreviation);
+    char *time_string = cJSON_Print(time);
+    char *temperature_2m_string = cJSON_Print(temperature_2m);
+    char *weather_code_string = cJSON_Print(weather_code);
+
+    printf("Latitude: %s\n", latitude_string);
+    printf("Longitude: %s\n", longitude_string);
+    printf("Timezone: %s\n", timezone_string);
+    printf("Timezone Abbreviation: %s\n", timezone_abbreviation_string);
+    printf("Time: %s\n", time_string);
+    printf("Temperature 2m: %s\n", temperature_2m_string);
+    printf("Weather Code: %s\n", weather_code_string);
     cJSON_Delete(json);
     // cJSON *root = cJSON_Parse(json_string);
     // cJSON *obj = cJSON_GetObjectItemCaseSensitive(root, "weather");
